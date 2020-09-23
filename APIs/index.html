@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APIs</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>APIs</h1>
+    <p>
+      API viene del inglés Application Programming Interface, y se refiere a la
+      interfaz que expone un programa para que pueda ser usado desde otro. En el
+      caso APIs web, el servidor exponer urls que al ser visitadas devuelven
+      datos de acuerdo a la estrucutra de la API.
+    </p>
+    <p>
+      A continuación mostraré una lista APIs que se pueden usar, en la mayoría
+      de ellas es necesario el registro, y la generación de una llave (API key).
+      Para ver una explicación más detallada de cómo usar javascript para hacer
+      los llamados a estas URLs visitar:
+      <a href="howtoJS.html">Cómo hacer llamados a una API?</a>
+    </p>
+    <ul>
+      <li>
+        <h2>NASA</h2>
+        <p>
+          Esta API permite obtener datos de la nasa, incluyendo imágenes. Para
+          usarla primero se debe visitar la
+          <a href="https://api.nasa.gov/">página para generar un API key</a>.
+        </p>
+        <p>
+          Luego de obtener la API key, que debe ser similar a
+          <code>V2q52eIfgecYd9vn7ji3SeIa9rlxSs91BXV6od9i</code>, simplemente
+          debe visitar la página que corresponda a los datos que quiera, por
+          ejemplo:
+        </p>
+        <p>
+          <a
+            href="https://api.nasa.gov/planetary/apod?api_key=V2q52eIfgecYd9vn7ji3SeIa9rlxSs91BXV6od9i"
+            >https://api.nasa.gov/planetary/apod?api_key=V2q52eIfgecYd9vn7ji3SeIa9rlxSs91BXV6od9i</a
+          >
+        </p>
+        <p>
+          La lista completa de APIs disponibles se encuentra
+          <a href="https://api.nasa.gov/">en este link.</a>
+        </p>
+        Aquí voy a demostrar la funcionalidad de algunas de estas.
+        <ul>
+          <li>
+            <h3>APOD</h3>
+            <p>
+              Astronomy picture of the day: como su nombre lo dice, esta api da
+              como resultado una imagen de astronomía de un día en particular.
+            </p>
+            <p>
+              Los parámetros que requiere se pueden ver en la siguiente tabla,
+              algunos de ellos son opcionales y tomarán el valor
+              <em>default</em> si no son especificados.
+            </p>
+            <img src="images/nasaApod.PNG" alt="Parametros nasa apod" />
+            <h4></h4>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Llamado a API</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>¿Cómo hacer llamados a una API desde JS?</h1>
+    <p>
+      Una API web es un servidor web que expone urls para que sean visitadas, y
+      den como resultado un conjunto de datos de acuerdo a las especificaciones
+      de la API. Para visitar estas páginas desde javascript vamos a usar
+      <a href="https://github.com/axios/axios">axios</a> y la sintaxis
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await"
+        >async/await</a
+      >.
+    </p>
+    <h2>Asynchronous JS</h2>
+    <p>
+      La ejecución usual de un programa se realiza instrucción por instrucción,
+      de manera que se espera a obtener la respuesta de la instrucción anterior
+      para ejecutar la siguiente. Esto se llama ejecución síncrona.
+    </p>
+    <p>
+      El problema con este tipo de ejecución surge principalmente cuando hay una
+      instrucción que tarda mucho más que las otras, por ejemplo descargar un
+      archivo de un servidor, o leer un archivo desde el disco duro. Esas
+      instrucciones bloquean la ejecución de otras que no necesariamente
+      dependen de su resultado.
+    </p>
+    <p>
+      Un ejemplo de esto puede ser por ejemplo una videollamada que tambien
+      permita chatear. Si por alguna razón la transmisión de video se bloqueara,
+      y la aplicación esperara a obtener una respuesta, se bloquearía tambien el
+      chat y el resto de la aplicación. Esta no sería una buena experiencia dado
+      que se espera que las dos cosas funcionen independientemente.
+    </p>
+    <p>
+      La solución a este problema es la ejecución <strong>asíncrona</strong> de
+      instrucciones, la cual consiste en hacer la solicitud, y NO esperar la
+      respuesta. En cambio el programa continúa su ejecución, y cuando la
+      respuesta esté lista la recibe y procesa.
+    </p>
+    <img
+      src="https://miro.medium.com/max/587/1*Y41dOkntUbR3I4UCJBx9Xg.png"
+      alt="Ejecución síncrona vs asíncrona"
+    />
+    <p>
+      En el ámbito de llamados a URLs en JS, todas las llamadas se realizan de
+      manera asíncrona. Vamos a usar una libreria llamada axios, la cual nos va
+      a facilitar el trabajo.
+    </p>
+    <h2>Llamado a URL básico</h2>
+    <p>Para hacer un llamado a una url vamos a usar el siguiente código:</p>
+    <script src="scripts/thenCatch.js"></script>
+    <pre class="prettyprint">
+      axios.get('https://jsonplaceholder.typicode.com/users')
+        .then(function (response) { 
+            // Esto se ejecuta al tener éxito con la solicitud
+            console.log(response); })
+        .catch(function (error) { 
+            // Esto se ejecuta cuando hay un error con la solicitud
+            console.log(error); })
+        .then(function () { 
+            // Esto se ejecuta siempre
+        });
+    </pre>
+    <p>
+      Adicionalmente, en el archivo html que incluya este javascript, se debe
+      incluir el archivo de axios con:
+    </p>
+    <pre class="prettyprint">
+        &lt;script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js">&lt;/script>
+    </pre>
+    <p>
+      Lo que se hace con el resultado obtenido dependerá de lo que se necesite.
+      En este caso simplemente se está imprimiendo en la consola el resultado.
+      Si es este momento va a la consola podrá ver el resultado. (Puede
+      presionar F12 para abrirla)
+    </p>
+    <img src="images/result.PNG" alt="Resultado de llamado a URL" />
+    <p>
+      En este caso el resultado contiene una propiedad llamada
+      <code>data</code> que contiene el nombre de usuarios, contraseñas y
+      correos que tienen el objetivo de ser usados como plantilla.
+    </p>
+
+    <h2>Llamado a URL con async/await</h2>
+    <p>
+      En el caso en el que no tengamos problema con esperar la respuesta de la
+      URL podemos obligar a javascript a esperar por el resultado antes de
+      ejecutar la siguiente instrucción. Esto tiene la ventaja de que no es
+      necesario definir funciones para then, y para catch.
+    </p>
+    <p>
+      Para hacer esto vamos a usar las palabras de javascript
+      <a href="https://javascript.info/async-await">async/await</a>.
+    </p>
+    <p>
+      <strong>await</strong> se debe escribir justo antes de la instrucción que
+      normalmente sería asíncrona. Pero para poder hacer esto se debe poner esta
+      instrucción dentro de una función, y a ésta se le debe escribir async
+      justo antes.
+    </p>
+    <pre class="prettyprint">
+        async function getData() {
+            try {
+              response = await axios.get(
+                "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"
+              );
+            } catch (err) {
+              alert("Imposible obtener datos");
+              console.log(err);
+              return;
+            }
+          
+            console.log(response);
+          }
+          but = document.querySelector("#buttonSol");
+          but.onclick = getData;
+    </pre>
+    <p>
+      Adicionalmente para lidiar con los errores se puede encerrar este llamado
+      a URL dentro de un bloque
+      <a
+        href="https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/try...catch"
+        >try...catch</a
+      >.
+    </p>
+
+    <p>
+      El resultado obtenido es un objeto JSON, que tiene la propiedad
+      <code>data</code>, la cual contiene información sobre la imagen del día en
+      astronomía.
+    </p>
+    <img src="images/resultNasa.PNG" alt="Resultado de llamado a URL" />
+    <p>
+      Para hacer la solicitud esta vez lo haremos cuando se presione el
+      siguiente botón. Si examinamos el resultado podemos ver una url a la
+      imagen de día, ésta se puede usar directamente en esta página:
+    </p>
+    <button id="buttonSol">Hacer solicitud</button>
+    <img id="imgDia" src="images/placeholder.PNG" alt="imagen del día" />
+    <script src="scripts/script.js"></script>
+  </body>
+</html>
