@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Flask</title>
+</head>
+<body>
+    <nav>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="flask.html">Flask</a></li>
+        <li><a href="heroku.html">Heroku</a></li>
+        <li><a href="mongodb.html">Mongodb</a></li>
+    </nav>
+    <div class="main-content">
+        <h1>Aplicación tareas usando Flask</h1>
+        <p>En este tutorial vamos a realizar una aplicación web usando el módulo Flask de python.La funcionalidad principal de la aplicación será llevar un registro de las tareas por hacer, teniendo en cuenta la materia, la fecha y el detalle.</p>
+        <h2>Rutas a considerar</h2>
+        <p>La aplicación va a ser fundamentalmente un sistema CRUD, en el cual vamos a tener rutas para crear, leer, actualizar y borrar tareas. Cada una de estas nos va a dar como resultado JSON con las tareas solicitadas y el resultado de la operación.</p>
+        <h3>READ</h3>
+        <p>Se van a usar 2 rutas diferentes de lectura, una que devuelve todas las tareas a la vez, y otra que devuelve sólo la tarea con el id recibido.</p>
+        <h4>Código</h4>
+            <script src="https://gist.github.com/lalbricenov/af1d1b4fde4140bc6e03cf1695accd75.js"></script>
+            <p>En este caso se están usando datos de prueba que están siendo almacenados directamente como una varible en python. Más adelante se hará la integración con la base de datos, lo que permitirá tener persistencia.</p>
+        <h4>Funcionamiento</h4>
+            <p>Las dos rutas creadas dan como resultado los datos en formato JSON. A continuación se muestran algunos ejemplos de los resultados obtenidos:</p>
+            <figure id="fig:rutaTareas">
+                <img src="images/rutaTareas.png" alt="Resultado en JSON que muestra todas las tareas" style="width:100%">
+                <figcaption><span class="figNumber"></span>. Resultado de acceder a la ruta <span class="code">/tareas</span> </figcaption>
+            </figure>
+            <figure id="fig:rutaTareaOK">
+                <img src="images/rutaTarea1.png" alt="Resultado en JSON que muestra una tarea" style="width:100%">
+                <figcaption><span class="figNumber"></span>. Resultado de acceder a la ruta <span class="code">/tarea/1</span> </figcaption>
+            </figure>
+            <figure id="fig:rutaTareaNotOK">
+                <img src="images/rutaTarea6.png" alt="Resultado en JSON que muestra un error porque la tarea no existe" style="width:100%">
+                <figcaption><span class="figNumber"></span>. Resultado de acceder a la ruta <span class="code">/tarea/6</span>. Ocurre un error dado que no existe una tarea con ese id. </figcaption>
+            </figure>
+        <h3>CREATE</h3>
+        <p>En esta ruta además de responder al método POST, vamos a responder también al método GET, de manera que sea más fácil crear ejemplos de tareas.</p>
+        <h4>Código</h4>
+            <h5>Estructura carpetas</h5>
+            <p>Dado que en este caso hay más archivos, es importante organizarlos. Una estrucutura de archivos posible es la siguiente:</p>
+            <figure id="fig:ordenArchivos1">
+                <img src="images/ordenArchivos1.png" alt="Estructura de archivos del proyecto" style="width:200px">
+                <figcaption><span class="figNumber"></span>. Estructura de archivos. Dentro de la carpeta templates está crear.html.</figcaption>
+            </figure>
+            <p>El código está dividido en 2 partes, una que corresponde a la lógica de la aplicación, y la otra que corresponde a un template de html que muestra el formulario.</p>
+            <h5>En applicacion.py:</h5>
+            <script src="https://gist.github.com/lalbricenov/6a12083aefbf904c25f81cd5ede9bced.js"></script>
+            <h5>Template HTML:</h5>
+            <script src="https://gist.github.com/lalbricenov/5a512b575cc56448ae356edfc4635077.js"></script>
+        <h4>Funcionamiento</h4>
+            <p>Al acceder a la ruta <span class="code">/crear</span> con el método GET se obtiene como resultado un formulario que puede ser usado para añadir tareas. </p>
+            <figure id="fig:getCrear">
+                <img src="images/getCrear.png" alt="Resultado de acceder a la ruta /crear con el método get: formulario para llenar." style="width:100%">
+                <figcaption><span class="figNumber"></span>. Resultado de acceder a la ruta <span class="code">/crear</span> con el método get: formulario para llenar. </figcaption>
+            </figure>
+            <figure id="fig:postCrear">
+                <img src="images/postCrear.png" alt="Resultado de acceder a la ruta /crear con el método post: JSON con el nuevo elemento creado." style="width:100%">
+                <figcaption><span class="figNumber"></span>. Resultado de acceder a la ruta <span class="code">/crear</span> con el método post: JSON con el nuevo elemento creado. </figcaption>
+            </figure>
+    </div>
+    <script src="figureNumbering.js"></script>
+</body>
+</html>
