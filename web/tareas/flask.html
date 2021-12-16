@@ -106,18 +106,15 @@
                 <figcaption><span class="figNumber"></span>. Resultado de acceder a la ruta <span class="code">/tarea/1/actualizar</span> con el método post. </figcaption>
             </figure>
         <h3>DELETE</h3>
-        <p>En esta ruta se va a responder al método DELETE únicamente. Para poder hacer la solitidud se va a usar por ahora la herramienta <a href="https://www.postman.com/">postman</a>. Esta herramienta permite hacer solicitudes con los métodos deseados y con los parámetros y contenidos deseados. Luego de instalar postman se escoge el método de la solicitud, y se escribe la ruta correspondiente, luego se presiona send.  </p>
-        <figure id="fig:deleteDelete">
-            <img src="images/deleteDelete.png" alt="Ventana de postman mostrando la elección del método y de la ruta." style="width:100%">
-            <figcaption><span class="figNumber"></span>Ventana de postman mostrando la elección del método y de la ruta.</figcaption>
-        </figure>
+        <!-- <p>En esta ruta se va a responder al método GET únicamente. Para poder hacer la solitidud se va a usar por ahora la herramienta <a href="https://www.postman.com/">postman</a>. Esta herramienta permite hacer solicitudes con los métodos deseados y con los parámetros y contenidos deseados. Luego de instalar postman se escoge el método de la solicitud, y se escribe la ruta correspondiente, luego se presiona send.  </p> -->
+        <p>En esta ruta se va a responder al método GET únicamente. </p>
         <h4>Código</h4>
             <p>En este caso todo lo que se hace es buscar el índice de la tarea que tiene el id solicitado y se borra de la lista.</p>
             <h5>En applicacion.py:</h5>
             <script src="https://gist.github.com/lalbricenov/4838197936b5b4e0a6970e5633138370.js"></script>
 
         <h4>Funcionamiento</h4>
-            <p>Al acceder a la ruta <span class="code">/tarea/1/borrar</span> con el método DELETE se obtiene como resultado la tarea que se acabó de borrar. Si la tarea no existe se obtiene un error. </p>
+            <p>Al acceder a la ruta <span class="code">/tarea/1/borrar</span> con el método GET se obtiene como resultado la tarea que se acabó de borrar. Si la tarea no existe se obtiene un error. </p>
             <figure id="fig:deleteDeleteResultado">
                 <img src="images/deleteDeleteResultado.png" alt="Resultado de acceder a la ruta /tarea/1/borrar con el método delete." style="width:100%">
                 <figcaption><span class="figNumber"></span>. Resultado de acceder a la ruta <span class="code">/tarea/1/borrar</span> con el método delete. </figcaption>
