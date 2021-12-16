@@ -16,7 +16,8 @@
     </nav>
     <div class="main-content">
         <h1>Aplicación tareas usando Flask</h1>
-        <p>En este tutorial vamos a realizar una aplicación web usando el módulo Flask de python.La funcionalidad principal de la aplicación será llevar un registro de las tareas por hacer, teniendo en cuenta la materia, la fecha y el detalle.</p>
+        <p>En este tutorial vamos a realizar una aplicación web usando el módulo Flask de python. La funcionalidad principal de la aplicación será llevar un registro de las tareas por hacer, teniendo en cuenta la materia, la fecha y el detalle.</p>
+        <p>Para la programación se va a usar la plataforma <a href="https://ide.cs50.io/">IDE CS50</a>.</p>
         <h2>Rutas a considerar</h2>
         <p>La aplicación va a ser fundamentalmente un sistema CRUD, en el cual vamos a tener rutas para crear, leer, actualizar y borrar tareas. Cada una de estas nos va a dar como resultado JSON con las tareas solicitadas y el resultado de la operación.</p>
         <h3>READ</h3>
@@ -25,6 +26,18 @@
             <script src="https://gist.github.com/lalbricenov/af1d1b4fde4140bc6e03cf1695accd75.js"></script>
             <p>En este caso se están usando datos de prueba que están siendo almacenados directamente como una varible en python. Más adelante se hará la integración con la base de datos, lo que permitirá tener persistencia.</p>
         <h4>Funcionamiento</h4>
+            <h5>Poniendo a funcionar el servidor</h5>
+            <p>Para que corra el programa es necesario ejecutar el comando <span class="code">flask run</span> en la terminal de CS50 IDE. Debe asegurarse de que se encuentra en la carpeta correcta, y que el archivo tiene el nombre application.py</p>
+            <h5>Probando las rutas</h5>
+            <p>Para probar las rutas creadas debe hacer click en el link que se genera al ejecutar el servidor, y al final poner la ruta a la que desea acceder.</p>
+            <figure id="fig:flaskRun">
+                <img src="images/flaskRun.png" alt="Terminal mostrando la ejecución del comando flask run, y un link generado" style="width:100%">
+                <figcaption><span class="figNumber"></span>. Resultado de la ejecución del comando <span class="code">flask run</span> </figcaption>
+            </figure>
+            <figure id="fig:urlRuta">
+                <img src="images/urlRuta.png" alt="Barra de direcciones con la ruta anterior/tareas" style="width:100%">
+                <figcaption><span class="figNumber"></span>. Dirección para probar la ruta <span class="code">/tareas</span> </figcaption>
+            </figure>
             <p>Las dos rutas creadas dan como resultado los datos en formato JSON. A continuación se muestran algunos ejemplos de los resultados obtenidos:</p>
             <figure id="fig:rutaTareas">
                 <img src="images/rutaTareas.png" alt="Resultado en JSON que muestra todas las tareas" style="width:100%">
@@ -39,7 +52,7 @@
                 <figcaption><span class="figNumber"></span>. Resultado de acceder a la ruta <span class="code">/tarea/6</span>. Ocurre un error dado que no existe una tarea con ese id. </figcaption>
             </figure>
         <h3>CREATE</h3>
-        <p>En esta ruta además de responder al método POST, vamos a responder también al método GET, de manera que sea más fácil crear ejemplos de tareas.</p>
+        <p>En esta ruta además de responder al método POST, el usual para crear, vamos a responder también al método GET, de manera que sea más fácil crear ejemplos de tareas, usando un formulario.</p>
         <h4>Código</h4>
             <h5>Estructura carpetas</h5>
             <p>Dado que en este caso hay más archivos, es importante organizarlos. Una estrucutura de archivos posible es la siguiente:</p>
@@ -49,18 +62,64 @@
             </figure>
             <p>El código está dividido en 2 partes, una que corresponde a la lógica de la aplicación, y la otra que corresponde a un template de html que muestra el formulario.</p>
             <h5>En applicacion.py:</h5>
+            <p>El siguiente código se debe poner justo después del utilizado para la operación de lectura. El código está compuesto de la ruta crear, y dos funciones más: validarInput y obtenerIdSiguiente. La primera de estas se encarga de verificar que los datos ingresados existan y que sean válidos. La segunda ruta se encarga de generar el id para la nueva tarea. Cuando se conecte la base de datos esto no será necesario dado que ella genera los ids de manera automática.</p>
             <script src="https://gist.github.com/lalbricenov/6a12083aefbf904c25f81cd5ede9bced.js"></script>
-            <h5>Template HTML:</h5>
+            <h5>Template crear.html:</h5>
             <script src="https://gist.github.com/lalbricenov/5a512b575cc56448ae356edfc4635077.js"></script>
         <h4>Funcionamiento</h4>
-            <p>Al acceder a la ruta <span class="code">/crear</span> con el método GET se obtiene como resultado un formulario que puede ser usado para añadir tareas. </p>
+            <p>Al acceder a la ruta <span class="code">/tareas/crear</span> con el método GET se obtiene como resultado un formulario que puede ser usado para añadir tareas. Al hacer click en el botón crear se accede a la ruta <span class="code">/crear</span> con el método POST, y pasando todos los datos del formulario lleno.</p>
             <figure id="fig:getCrear">
                 <img src="images/getCrear.png" alt="Resultado de acceder a la ruta /crear con el método get: formulario para llenar." style="width:100%">
-                <figcaption><span class="figNumber"></span>. Resultado de acceder a la ruta <span class="code">/crear</span> con el método get: formulario para llenar. </figcaption>
+                <figcaption><span class="figNumber"></span>. Resultado de acceder a la ruta <span class="code">/tareas/crear</span> con el método get: formulario para llenar. </figcaption>
             </figure>
             <figure id="fig:postCrear">
                 <img src="images/postCrear.png" alt="Resultado de acceder a la ruta /crear con el método post: JSON con el nuevo elemento creado." style="width:100%">
-                <figcaption><span class="figNumber"></span>. Resultado de acceder a la ruta <span class="code">/crear</span> con el método post: JSON con el nuevo elemento creado. </figcaption>
+                <figcaption><span class="figNumber"></span>. Resultado de acceder a la ruta <span class="code">/tareas/crear</span> con el método post: JSON con el nuevo elemento creado. </figcaption>
+            </figure>
+            <p>Si no se ingresan todos los datos, o se ingresan datos inválidos, el servidor devuelve un mensaje de error apropiado.</p>
+            <figure id="fig:formularioFechaInvalida">
+                <img src="images/formularioFechaInvalida.png" alt="Formulario con una fecha inválida." style="width:100%">
+                <figcaption><span class="figNumber"></span>. Formulario con una fecha inválida.</figcaption>
+            </figure>
+            <figure id="fig:errorFecha">
+                <img src="images/errorFecha.png" alt="JSON indicando que la fecha no es válida." style="width:100%">
+                <figcaption><span class="figNumber"></span>. Formulario con una fecha inválida.</figcaption>
+            </figure>
+        <h3>UPDATE</h3>
+        <p>En esta ruta además de responder al método POST, vamos a responder también al método GET, de manera que sea más fácil modificar los ejemplos de tareas.</p>
+        <h4>Código</h4>
+            <p>Para hacer la ruta con el método get es necesario crear un template html muy similar al usado para la ruta de creación de tareas. La única diferencia será que al mostrar el formulario ya le aparecerá lleno al usuario, de manera que simplemente le haga los cambios que desee.</p>
+            <h5>En applicacion.py:</h5>
+            <script src="https://gist.github.com/lalbricenov/c52217d5dd64ee9bca79cb2151d2423c.js"></script>
+            <h5>Template HTML: actualizar.html</h5>
+            <script src="https://gist.github.com/lalbricenov/cffe7acf379dd6a7969cae0a4352db34.js"></script>
+        <h4>Funcionamiento</h4>
+            <p>Al acceder a la ruta <span class="code">/tarea/1/actualizar</span> con el método GET se obtiene como resultado un formulario lleno con los valores de la tarea que tiene id 1. La idea es que se hagan los cambios que se necesiten y luego se presione actualizar. </p>
+            <figure id="fig:getActualizar">
+                <img src="images/getActualizar.png" alt="Resultado de acceder a la ruta /tarea/1/actualizar con el método get: formulario para modificar." style="width:100%">
+                <figcaption><span class="figNumber"></span>. Resultado de acceder a la ruta <span class="code">/tarea/1/actualizar</span> con el método get. </figcaption>
+            </figure>
+            <p>Cuando el usuario presiona actualizar, se accede a la ruta <span class="code">/tarea/1/actualizar</span> con el método POST. Esto hace que se validen los datos, y posteriormente se modifique la tarea que tiene el id 1 con los datos nuevos. Como resultado se obtiene el status, y la tarea actualizada.</p>
+            <figure id="fig:postActualizar">
+                <img src="images/postActualizar.png" alt="Resultado de acceder a la ruta /tarea/1/actualizar con el método POST: json con la tarea modificada." style="width:100%">
+                <figcaption><span class="figNumber"></span>. Resultado de acceder a la ruta <span class="code">/tarea/1/actualizar</span> con el método post. </figcaption>
+            </figure>
+        <h3>DELETE</h3>
+        <p>En esta ruta se va a responder al método DELETE únicamente. Para poder hacer la solitidud se va a usar por ahora la herramienta <a href="https://www.postman.com/">postman</a>. Esta herramienta permite hacer solicitudes con los métodos deseados y con los parámetros y contenidos deseados. Luego de instalar postman se escoge el método de la solicitud, y se escribe la ruta correspondiente, luego se presiona send.  </p>
+        <figure id="fig:deleteDelete">
+            <img src="images/deleteDelete.png" alt="Ventana de postman mostrando la elección del método y de la ruta." style="width:100%">
+            <figcaption><span class="figNumber"></span>Ventana de postman mostrando la elección del método y de la ruta.</figcaption>
+        </figure>
+        <h4>Código</h4>
+            <p>En este caso todo lo que se hace es buscar el índice de la tarea que tiene el id solicitado y se borra de la lista.</p>
+            <h5>En applicacion.py:</h5>
+            <script src="https://gist.github.com/lalbricenov/4838197936b5b4e0a6970e5633138370.js"></script>
+
+        <h4>Funcionamiento</h4>
+            <p>Al acceder a la ruta <span class="code">/tarea/1/borrar</span> con el método DELETE se obtiene como resultado la tarea que se acabó de borrar. Si la tarea no existe se obtiene un error. </p>
+            <figure id="fig:deleteDeleteResultado">
+                <img src="images/deleteDeleteResultado.png" alt="Resultado de acceder a la ruta /tarea/1/borrar con el método delete." style="width:100%">
+                <figcaption><span class="figNumber"></span>. Resultado de acceder a la ruta <span class="code">/tarea/1/borrar</span> con el método delete. </figcaption>
             </figure>
     </div>
     <script src="figureNumbering.js"></script>
