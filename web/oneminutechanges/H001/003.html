@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <title>TH001-003</title>
+</head>
+<body>
+    <nav>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#Tareas">Tareas</a></li>
+    </nav>
+    <div class="main-content">
+        <h1>TH001-003</h1>
+        <h2>Creación de la base de datos en MongoDB Atlas con la colección de usuarios.</h2>
+        <p>Para crear la base de datos en MongoDB Atlas primero debemos ir a <a href="https://www.mongodb.com/atlas/database">Atlas</a> e iniciar sesión. Luego de eso debemos hacer click en browse collections.</p>
+        <figure>
+            <img src="../images/browseCollections.jpg" alt="MongoDB Atlas dashboard">
+        </figure>
+        <p>A continuación creamos una nueva base de datos, la cual vamos a llamar oneminute, y en ella una colección llamada usuarios.</p>
+        <figure>
+            <img src="../images/createCollectionUsuarios.jpg" alt="">
+        </figure>
+        <h2>Creación de un index para que el correo sea único</h2>
+        <p>Dado que vamos a usar el correo para identificar de manera única a los usuarios, es importante que no existan dos usuarios con el mismo correo.</p>
+        <p>Para esto se puede crear lo que se llama un index (índice) que lo que hace es permitir que la búsqueda por una columna en particular sea mucho más rápida. Con esa velocidad, mongodb puede verificar facilmente si el correo ya existe o no, y rechazar la adición del nuevo documento si el correo ya existe.</p>
+        <p>Para crear el índice vamos a usar MongoDB Compass. Luego de conectarse al cluster, haga click en la base de datos oneminute, y posteriormente en la parte inferior donde dice mongosh.</p>
+        <figure>
+            <img src="../images/connectCompass.jpg" alt="">
+        </figure>
+        <figure>
+            <img src="../images/openMongosh.jpg" alt="">
+        </figure>
+        <p>Luego cree el índice usando el siguiente comando:</p>
+        <figure>
+            <img src="../images/indexCreation.jpg" alt="">
+        </figure>
+    </div>
+</body>
+</html>

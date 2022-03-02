@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <title>TH001-002</title>
+</head>
+<body>
+    <nav>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#Tareas">Tareas</a></li>
+    </nav>
+    <div class="main-content">
+        <h1>TH001-002</h1>
+        <h2>Definición de la estructura de la colección usuarios.</h2>
+        <p>La colección de usuarios debe incluir además de los datos básicos, la clave, y los roles del usuario.</p>
+        <table>
+            <tr>
+                <th>Nombre propiedad</th> <th>Descripción</th> <th>Tipo de variable</th><th>Restricciones</th> <th>Notas</th>
+            </tr>
+            <tr><td>Nombres</td><td>Primer y segundo nombre del usuario.</td><td>String</td><td>No debe ser vacío</td> <td>Se debe guardar con la primera letra en mayúsculas y las demás en minúsculas.</td></tr>
+            <tr><td>Apellidos</td><td>Apellidos del usuario.</td><td>String</td><td>No debe ser vacío</td> <td>Se debe guardar con la primera letra en mayúsculas y las demás en minúsculas.</td></tr>
+            <tr><td>Correo</td><td>Correo con el que se registró el usuario.</td><td>String</td><td>No debe ser vacío, debe ser único</td> <td>El correo será lo que identificará de manera única al usuario.</td></tr>
+            <tr><td>Clave</td><td>Hash de la contraseña escogida por el usuario.</td><td>String</td><td>No debe ser vacío.</td> <td>No se guarda directamente la contraseña para mayor seguridad.</td></tr>
+            <tr><td>Roles</td><td>Lista de los roles que tiene el usuario.</td><td>Lista de strings</td><td>No debe ser vacío. Cada uno de los elementos de la lista debe ser alguno de los siguientes: estudiante, profesor.</td> <td>Se guardan los roles para permitir a la aplicación distinguir entre profesores y estudiantes.</td></tr>
+        </table>
+        
+    </div>
+    <script src="figureNumbering.js"></script>
+</body>
+</html>

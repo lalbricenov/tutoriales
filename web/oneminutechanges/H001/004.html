@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <title>TH001-004</title>
+</head>
+<body>
+    <nav>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#Tareas">Tareas</a></li>
+    </nav>
+    <div class="main-content">
+        <h1>TH001-004</h1>
+        <h2>Crear un servidor de flask que permita registrarse a través de una página web.</h2>
+        <p>Vamos a utilizar la plataforma de visual studio code en la nube <a href="https://code.cs50.io/">code.cs50.io</a>. En esa plataforma al igual que en Visual Studio Code de escritorio, se debe abrir una carpeta para ver los archivos, ya hay una abierta por defecto, pero dado que necesitamos usar github y esta carpeta <a href="https://cs50.readthedocs.io/code/#using-git">tiene problemas</a>, vamos a abrir otra.</p>
+        <figure>
+            <img src="../images/folderVS.png" alt="MongoDB Atlas dashboard">
+        </figure>
+        <figure>
+            <img src="../images/openfolder.jpg" alt="MongoDB Atlas dashboard">
+        </figure>
+        <p>Luego vamos a crear una carpeta llamada oneminute y en ella vamos a poner todos los archivos del proyecto en flask. Debe obtener una estructura como la siguiente: </p>
+
+        <figure>
+            <img src="../images/filesFlask.jpg" alt="">
+        </figure>
+        
+        <h3>Código</h3>
+        <h4>Application.py</h4>
+        <p>Este es el archivo principal de la aplicación. La aplicación por ahora va a responder únicamente a la ruta /register.</p>
+        <p>La primera parte del código incluye los módulos necesarios, y define cosas como el link a la base de datos, y el formato que debe seguir una dirección de correo electrónico.</p>
+        <figure>
+            <img src="../images/encabezadosApp.jpg" alt="">
+        </figure>
+        <p>La siguiente sección del código define la ruta a la que se va a responder, y valida que los datos ingresados por el usuario sean válidos.</p>
+        <figure>
+            <img src="../images/app2.jpg" alt="">
+        </figure>
+        <p>La última parte incluye la verificación de que las claves coincidan y genera el hash de la contraseña. Adicionalmente hace el llamado a la base de datos para incluir el nuevo usuario en la colección de usuarios.</p>
+        <figure>
+            <img src="../images/app3.jpg" alt="">
+        </figure>
+        <h4>register.html</h4>
+        <p>Este template está diseñado para mostrar formulario para que el usuario ingrese sus datos.</p>
+        <figure>
+            <img src="../images/codigoRegister.jpg" alt="">
+        </figure>
+        <h4>index.html</h4>
+        <p>Este template está diseñado para mostrar el resultado luego de lograr añadir un usuario nuevo.</p>
+        <figure>
+            <img src="../images/codigoIndex.jpg" alt="">
+        </figure>
+        <h3>Virtual environment</h3>
+        <p>
+            Para tener claras las dependencias de nuestro proyecto al momento de subirlo a una plataforma como Heroku se va a usar un entorno virtual. Esto permite instalar paquetes sólo para este proyecto.
+        </p>
+        <p>Primero se debe crear el entorno virtual, y luego se debe activar:</p>
+        <figure>
+            <img src="../images/CreateVenv.jpg" alt="">
+        </figure>
+        <h3>Variables de entorno</h3>
+        <p>Muchas veces no se quieren poner datos sensibles como contraseñas directamente en el código, o no se conocen los datos de antemano. Es posible definir variables en el sistema operativo que posteriormente pueden ser leidas desde python. Estas variables se llaman variables de entorno, y para darles un valor basta con escribir un comando.</p>        
+        <p>En este caso vamos a definir cuatro variables de entorno: el usuario de la base de datos, la clave correspondiente, la variable FLASK_ENV que hace que flask esté en modo desarrollo, y la variable FLASK_APP que determina el nombre del archivo principal de la aplicación.</p>
+        <figure>
+            <img src="../images/environmentVariables.jpg" alt="">
+        </figure>
+        <figure>
+            <img src="../images/flaskEnv.jpg" alt="">
+        </figure>
+        <h3>Dependencias</h3>
+        <p>Es necesario instalar algunas dependencias para que la aplicación pueda ejecutarse.</p>
+        <figure>
+            <img src="../images/pipPymongo.jpg" alt="">
+        </figure>
+        <figure>
+            <img src="../images/pipFlask.jpg" alt="">
+        </figure>
+        <figure>
+            <img src="../images/pipFlaskSession.jpg" alt="">
+        </figure>
+        
+        <h3>Ejecutando el servidor</h3>
+        <p>Para ejecutar el servidor vamos a usar el siguiente comando:</p>
+        <figure>
+            <img src="../images/runFlask.jpg" alt="">
+        </figure>
+        <p>El servidor así estará corriendo en el puerto 5500 de la máquina en la  nube. El problema es que no podemos acceder a ese servidor directamente. Se debe hace algo llamado port forwarding. Para hacerlo vaya a la pestaña ports, y luego escriba el número del puerto y presione enter.</p>
+        
+        <figure>
+            <img src="../images/forwardPort1.jpg" alt="">
+        </figure>
+        <figure>
+            <img src="../images/forwardPort2.jpg" alt="">
+        </figure>
+        <p>Lo que esto va a hacer es generar una dirección que va a llevar al servidor en la nube. El link al que debe acceder para ver su servidor es el que está en la segunda columna de la imagen anterior.</p>
+        <figure>
+            <img src="../images/rutaRegister.jpg" alt="">
+        </figure>
+        <p>El comportamiento de la aplicación debería ser como se muestra en las siguientes imágenes:</p>
+        <figure>
+            <img src="../images/datosEjemplo.jpg" alt="">
+        </figure>
+        <figure>
+            <img src="../images/resultado.jpg" alt="">
+        </figure>
+        <figure>
+            <img src="../images/resultado2.jpg" alt="">
+        </figure>
+        <p>Si se prueba de nuevo pero con un correo repetido:</p>
+        <figure>
+            <img src="../images/correoRepetido1.jpg" alt="">
+        </figure>
+        <figure>
+            <img src="../images/duplicateKeyError.jpg" alt="">
+        </figure>
+        <h3>Control de excepciones</h3>
+        <p>Como se pudo ver en el ejemplo anterior, no siempre van a salir bien las operaciones que se realicen con la base de datos. Por esta razón es importante encerrar estas operaciones en un bloque try except, que se encarga de probar, y si ocurre un error reacciona de manera apropiada.</p>
+        <p>Reemplazar el código del final por:</p>
+        
+        <figure>
+            <img src="../images/tryExceptCorreo.jpg" alt="">
+        </figure>
+        <p>Lo que se obtiene ahora al tratar con un correo repetido es:</p>
+        <figure>
+            <img src="../images/correoRepetido2.jpg" alt="">
+        </figure>
+        
+        <h3>Publicación</h3>
+        <h4>Preparación para Heroku</h4>
+        <p>Para publicar este servidor web vamos a usar la plataforma <a href="https://www.heroku.com/">Heroku</a>, la cual nos brinda una alternativa gratuita. Si no tiene una cuenta regístrese. Utilice un correo en el que pueda recibir emails de fuentes externas.</p>
+        <figure>
+            <img src="../images/registroHeroku.jpg" alt="">
+        </figure>
+        <p>Debemos ajustar algunas cosas en la aplicación antes de poder publicarla en Heroku.</p>
+        <ul>
+            <li>Cree un archivo llamado Procfile con P mayúscula, cuyo contenido sea el que se muestra en la imagen.
+                <figure>
+                    <img src="../images/procfile.jpg" alt="">
+                </figure>                
+            </li>
+            <li>
+                Instale el módulo Gunicorn, el cual va a ser el encargado de generar el servidor de manera más segura y robusta que flask por sí solo.
+                <figure>
+                    <img src="../images/installGunicorn.jpg" alt="">
+                </figure>                
+            </li>
+            <li>
+                Genere el archivo con la lista de dependencias del proyecto.
+                <figure>
+                    <img src="../images/requirements.jpg" alt="">
+                </figure>                
+            </li>
+            <li>
+                <p>Genere la lista de archivos que van a ser ignorados por git, de manera que no suban a github. Esto es útil especialmente porque la carpeta del entorno virtual es pesada, y esos módulos ya están en Heroku. </p>
+                <p>Para generar el archivo .gitignore, vamos a usar un servicio web que se encuentra en <a href="https://www.toptal.com/developers/gitignore">toptal</a>. Vaya allí, y genere el archivo correspondiente al lenguaje python.</p>
+                <figure>
+                    <img src="../images/createGitignore.jpg" alt="">
+                </figure>
+                <p>Copie todo el contenido de ese archivo y péguelo en un archivo llamado .gitignore junto al archivo application.py</p>
+                <figure>
+                    <img src="../images/estructuraArchivos.jpg" alt="">
+                </figure>
+            </li>
+        </ul>
+        
+        <h4>Github</h4>
+        <p>Vamos a subir la aplicación a github para luego subirla desde allí a la plataforma Heroku. </p>
+        <ul>
+            <li>Cree un repositorio si aún no lo ha hecho.
+                <figure>
+                    <img src="../images/gitInit.jpg" alt="">
+                </figure>
+            </li>
+            <li>Añada todos los archivos al commit que se va a hacer. Este comando va a ignorar los archivos que aparezcan en el archivo .gitignore.</li>
+            <figure>
+                <img src="../images/commit.jpg" alt="">
+            </figure>
+            <li>A continuación haga el commit, ponga un mensaje descriptivo, este caso escribí commit inicial.</li>
+            <li>Cree un repositorio llamado oneminute en github.</li>
+            <li><strong>SSH</strong> Para subir de manera segura sus archivos a github vamos a usar el protocolo SSH, el cual consiste en una serie de llaves con las cuales un dispositivo puede saber que está comunicandose con el computador correcto. 
+                <ul>
+                    <li>Genere una llave SSH desde cs50 code. Use el comando que se muestra, y en todas las preguntas simplemente presione enter. 
+                    <figure>
+                        <img src="../images/SSH3.jpg" alt="">
+                    </figure>
+                </li>
+                <li>Copie la llave pública: Para esto ejecute el comando siguiente, y copie lo que aparece.</li>
+                <figure>
+                    <img src="../images/SSH5.jpg" alt="">
+                </figure>
+                <li>Añada la llave SSH a su cuenta de github. Para esto tome el contenido del archivo key.pub y péguelo en el lugar correcto.
+                         <figure>
+                             <img src="../images/SSH1.jpg" alt="">
+                         </figure>
+                         <figure>
+                             <img src="../images/SSH2.jpg" alt="">
+                         </figure>
+                         <figure>
+                             <img src="../images/SSH4.jpg" alt="">
+                         </figure>
+                         
+                        </li>
+                    </ul>
+                </li>
+                <li>Añada el repositorio remoto y haga el push a este.
+                <figure>
+                    <img src="../images/github1.jpg" alt="">
+                </figure>
+                <figure>
+                    <img src="../images/gitpush.jpg" alt="">
+                </figure>
+
+            </li>
+        </ul>
+        <p>Después de aceptar los términos haga click en create new app</p>
+        <figure>
+            <img src="../images/userCreatedHeroku.jpg" alt="">
+        </figure>
+        <p>A continuación escoja un nombre descriptivo que esté disponible.</p>
+        <figure>
+            <img src="../images/herokuCreate.jpg" alt="">
+        </figure>
+        <p>Conecte Heroku con su cuenta de github, y escoja el repositorio correcto. Luego habilite los Automatic Deploys.</p>
+        <figure>
+            <img src="../images/herokuGit.jpg" alt="">
+        </figure>
+        <figure>
+            <img src="../images/herokigit2.jpg" alt="">
+        </figure>
+        <p>El último paso es configurar las variables de entorno que habiamos configurado en el sistema operativo, es decir dbPass y dbUser:</p>
+        <figure>
+            <img src="../images/varsHeroku.jpg" alt="">
+        </figure>
+        <figure>
+            <img src="../images/varsHeroku2.jpg" alt="">
+        </figure>
+        <p>Por último en la pestaña deploy haga click en deploy branch. Y luego abra su aplicación.</p>
+        
+        
+        
+    </div>
+</body>
+</html>

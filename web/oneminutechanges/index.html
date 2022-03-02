@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>One Minute Changes</title>
+</head>
+<body>
+    <nav>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#Tareas">Tareas</a></li>
+    </nav>
+    <div class="main-content">
+        <h1>Aplicación One Minute Changes  usando Python, Mongodb y React</h1>
+        <p>En este tutorial vamos a realizar una aplicación movil usando Flask, mongodb Atlas, Heroku y React native. </p>
+        <h2>Aplicación</h2>
+        <p>Durante el aprendizaje de cualquier instrumento musical la práctica constante juega un rol muy importante. En particular para el aprendizaje de la guitarra es necesario estar en capacidad de cambiar entre un acorde y otro de manera ágil. <a href="https://www.justinguitar.com/guitar-lessons/one-minute-changes-exercise-b1-110">One minute changes</a> se refiere a una rutina de práctica que consiste en cambiar entre un par de acordes el mayor número de veces posible en un minuto.</p>
+        <h3>Requisitos</h3>
+        <p>Lea el articulo sobre los requisitos <a href="requisitos.html">aquí.</a></p>
+        <h4>Personas</h4>
+        <ul>
+            <li><strong>Pedro o María:</strong> hombre o mujer interesados en aprender a tocar guitarra que hacen uso de aplicaciones para mejorar su aprendizaje. Están interesados en practicar frecuentemente, de manera que puedan ver avances significativos.</li>
+            <li><strong>Juan: </strong> profesor de guitarra que tiene varios estudiantes. Le interesa que sus estudiantes practiquen frecuentemente y ver su progreso, así como sus dificultades.</li>
+        </ul>
+        <h4>Historias de usuario</h4>
+        <ul>
+            <li><strong>H001</strong> Como Pedro quiero iniciar sesión en la aplicación para que mi historial no se pierda incluso si cambio de dispositivo.</li>
+            <li><strong>H002</strong> Como Pedro quiero ver una tabla con el número de cambios en un minuto entre cada par de acordes para reconocer aquellos en los que necesito practicar más.</li>
+            <li><strong>H003</strong> Como Pedro quiero registrar una sesión de cambios de un minuto indicando la calidad y el número de cambios para poder verlos luego y entender el progreso que he tenido.</li>
+            <li><strong>H004</strong> Como Pedro quiero ver un gráfico como función del tiempo que muestre el avance en el número de cambios entre dos acordes para ver si estoy estancado.</li>
+            <li><strong>H005</strong> Como Juan quiero añadir a mis estudiantes a mi clase para poder ver su perfil, incluyendo su progreso en cada cambio de acordes.</li>
+            <li><strong>H006</strong> Como Juan quiero ver la lista de sesiones de práctica de cada estudiante organizadas por fecha para ver si ha sido responsable o no.</li>
+        </ul>
+        <h4 id="Tareas">Tareas</h4>
+        <p>Estas son las tareas asociadas a las historias de usuario anteriores.</p>
+        <ul>
+            <li><strong>H001</strong>
+                <ul>
+                    <li><strong><a href="./H001/002.html">TH001-002</a> </strong> Definir estructura de colección de usuarios.</li>
+                    <li><strong><a href="./H001/003.html">TH001-003</a> </strong> Crear la base de datos en mongodb Atlas con la colección de usuarios.</li>
+                    <li><strong><a href="./H001/004.html">TH001-004</a> </strong> Crear un servidor de flask que permita registrarse a través de una página web.</li>
+                    <li><strong><a href="./H001/005.html">TH001-005</a> </strong> Crear un servidor de flask que permita el inicio de sesión a través de una página web.</li>
+                    <li><strong><a href="./H001/006.html">TH001-006</a> </strong> Crear una aplicación en React Native que muestre un formulario de registro.</li>
+                    <li><strong><a href="./H001/007.html">TH001-007</a> </strong> Añadir a la aplicación en React Native una pantalla que permita el inicio de sesión.</li>                    
+                </ul>
+            </li>
+            <li><strong>H002</strong>
+                <ul>
+                    <li><strong><a href="./H002/001.html">TH002-001</a> </strong> Definir estructura de colección de oneMinuteChanges.</li>
+                    <li><strong><a href="./H002/002.html">TH002-002</a> </strong> Añadir una ruta al servidor que devuelva la colección de oneMinuteChanges del usuario en formato JSON.</li>
+                    <li><strong><a href="/H002/003.html"></a> TH002-003</strong> Crear una pantalla en React Native que muestre una tabla con los números de cambios usando los datos obtenidos del servidor en formato JSON.</li>
+                </ul>
+            </li>
+        </ul>
+        <p>Este tutorial está dividido en 3 partes:</p>
+        <ol>
+            <li><a href="flask.html">Creación de la aplicación base</a></li>
+            <li><a href="heroku.html">Configuración para la publicación en Heroku</a></li>
+            <li><a href="mongodb.html">Inclusión de la base de datos</a></li>
+        </ol>
+    </div>
+</body>
+</html>
